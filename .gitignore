@@ -1,0 +1,156 @@
+# =========================
+# Android Studio / IntelliJ
+# =========================
+
+*.iml
+.idea/
+!.idea/.name
+!.idea/codeStyles/
+!.idea/inspectionProfiles/
+!.idea/runConfigurations/
+
+# Android Studio generated files
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/deploymentTargetDropDown.xml
+.idea/discord.xml
+
+# =========================
+# Gradle
+# =========================
+
+.gradle/
+build/
+**/build/
+
+# Gradle local configuration
+local.properties
+
+# =========================
+# Android
+# =========================
+
+/captures/
+/.externalNativeBuild/
+/.cxx/
+
+# Generated APK / AAB
+*.apk
+*.aab
+
+# Mapping / obfuscation files
+*.mapping
+*.hprof
+
+# =========================
+# Kotlin
+# =========================
+
+.kotlin/
+.kotlin-daemon/
+
+# Kotlin generated files
+*.kotlin_module
+
+# =========================
+# NDK / CMake
+# =========================
+
+.cxx/
+.externalNativeBuild/
+cmake-build-*/
+
+# =========================
+# Signing / Keystore
+# =========================
+
+*.jks
+*.keystore
+
+# If you have debug keystore generated locally
+debug.keystore
+
+# =========================
+# Firebase / Google Services
+# =========================
+
+google-services.json
+
+# =========================
+# Environment / Secrets
+# =========================
+
+.env
+.env.*
+!.env.example
+
+*.secret
+secrets.properties
+secrets.xml
+
+# =========================
+# OS Generated Files
+# =========================
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+
+# =========================
+# Temporary / Backup Files
+# =========================
+
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+*.bak
+
+# =========================
+# Logs
+# =========================
+
+*.log
+
+# =========================
+# Generated Reports
+# =========================
+
+/reports/
+/test-results/
+
+# =========================
+# Compose / Preview
+# =========================
+
+/screenshots/
+
+# =========================
+# Fastlane
+# =========================
+
+/fastlane/report.xml
+/fastlane/Preview.html
+/fastlane/screenshots/**/*.png
+/fastlane/test_output/
+
+# =========================
+# IntelliJ
+# =========================
+
+out/
+
+# =========================
+# Mac / Linux
+# =========================
+
+*.orig
