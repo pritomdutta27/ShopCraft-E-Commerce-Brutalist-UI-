@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -24,3 +25,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ShopCraft Premium E-Commerce"
 include(":app")
+include(":core:common")
