@@ -13,7 +13,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("com.android.library")
-                apply("org.jetbrains.kotlin.android")
+//                apply("org.jetbrains.kotlin.android")
             }
 
             val libs = versionCatalog()
@@ -32,7 +32,5 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
             configureKotlin()
         }
-
-
     }
 }

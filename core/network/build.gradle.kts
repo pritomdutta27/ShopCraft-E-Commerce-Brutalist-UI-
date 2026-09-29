@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "site.prito.dutta.core.common"
+    namespace = "site.pritom.network"
 }
 
 dependencies {

@@ -18,5 +18,9 @@ gradlePlugin {
             id = "site.pritom.dutta.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
+        register("createFeature") {
+            id = "site.pritom.dutta.create.feature"
+            implementationClass = "create_feature_module.FeaturePlugin"
+        }
     }
 }

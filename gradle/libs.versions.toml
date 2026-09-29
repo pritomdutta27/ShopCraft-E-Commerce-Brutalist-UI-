@@ -11,6 +11,10 @@ composeBom = "2026.09.00"
 appcompat = "1.8.0"
 material = "1.14.0"
 
+#
+compileSdk = "37"
+minSdk = "24"
+
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -36,3 +40,5 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 
+#Convention Plugin
+pritom-android-library = { id = "site.pritom.dutta.android.library" }
