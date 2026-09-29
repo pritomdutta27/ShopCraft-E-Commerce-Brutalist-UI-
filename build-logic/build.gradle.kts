@@ -20,10 +20,12 @@ gradlePlugin {
             id = "site.pritom.dutta.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+
         register("androidLibrary") {
             id = "site.pritom.dutta.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
+
         register("androidCompose") {
             id = "site.pritom.dutta.android.compose"
             implementationClass = "AndroidComposeConventionPlugin"
@@ -33,6 +35,12 @@ gradlePlugin {
             id = "site.pritom.dutta.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
+
+        register("androidFeature") {
+            id = "site.pritom.dutta.android.features"
+            implementationClass = "AndroidFeatureConventionPlugin"
+        }
+
         register("createFeature") {
             id = "site.pritom.dutta.create.feature"
             implementationClass = "create_feature_module.FeaturePlugin"

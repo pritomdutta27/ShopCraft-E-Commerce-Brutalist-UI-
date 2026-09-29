@@ -10,8 +10,18 @@ kotlin = "2.4.20"
 composeBom = "2026.09.00"
 appcompat = "1.8.0"
 material = "1.14.0"
+composeNavigation = "2.9.8"
+androidxHiltNavigationCompose = "1.4.0"
 ksp = "2.3.2"
 hilt = "2.60.1"
+
+# Async & Networking
+coroutines = "1.11.0"
+materialIconsCore = "1.7.8"
+retrofit = "3.0.0"
+retrofitKotlinxSerializationJson = "1.0.0"
+okhttp = "5.4.0"
+kotlinxSerializationJson = "1.6.3"
 
 #Application
 compileSdk = "37"
@@ -43,6 +53,13 @@ material = { group = "com.google.android.material", name = "material", version.r
 #Hilt
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 hilt-gradlePlugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+
+# Coroutines
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 
 
 # AndroidX & Lifecycle
@@ -62,4 +79,5 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 pritom-android-application = { id = "site.pritom.dutta.android.application" }
 pritom-android-library = { id = "site.pritom.dutta.android.library" }
 pritom-android-compose = { id = "site.pritom.dutta.android.compose" }
+pritom-android-features = { id = "site.pritom.dutta.android.features" }
 pritom-android-hilt = { id = "site.pritom.dutta.android.hilt" }
