@@ -16,4 +16,6 @@ fun VersionCatalog.lib(alias: String) = findLibrary(alias).get()
 
 fun VersionCatalog.bundle(alias: String) = findBundle(alias).get()
 
+fun VersionCatalog.plugins(alias: String) = findPlugin(alias).get()
+
 fun VersionCatalog.version(alias: String) = findVersion(alias).get().requiredVersion
