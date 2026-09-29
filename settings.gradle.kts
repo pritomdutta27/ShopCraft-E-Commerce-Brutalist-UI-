@@ -26,3 +26,14 @@ dependencyResolutionManagement {
 rootProject.name = "ShopCraft Premium E-Commerce"
 include(":app")
 include(":core:common")
+include(":core:network")
+include(":core:designsystems")
+
+include(":features:details_screen:data")
+include(":features:details_screen:domain")
+include(":features:details_screen:presentation")
+
+
+include(":features:home:data")
+include(":features:home:domain")
+include(":features:home:presentation")
