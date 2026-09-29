@@ -22,6 +22,10 @@ gradlePlugin {
             id = "site.pritom.dutta.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
+        register("androidCompose") {
+            id = "site.pritom.dutta.android.compose"
+            implementationClass = "AndroidComposeConventionPlugin"
+        }
         register("createFeature") {
             id = "site.pritom.dutta.create.feature"
             implementationClass = "create_feature_module.FeaturePlugin"
