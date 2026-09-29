@@ -14,6 +14,10 @@ dependencies {
 
 gradlePlugin {
     plugins {
+        register("androidApplication") {
+            id = "site.pritom.dutta.android.application"
+            implementationClass = "AndroidApplicationConventionPlugin"
+        }
         register("androidLibrary") {
             id = "site.pritom.dutta.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
