@@ -10,6 +10,8 @@ group = "site.pritom.dutta.convention.buildLogic"
 dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(libs.ksp.gradlePlugin)
+    compileOnly(libs.hilt.gradlePlugin)
 }
 
 gradlePlugin {
@@ -25,6 +27,11 @@ gradlePlugin {
         register("androidCompose") {
             id = "site.pritom.dutta.android.compose"
             implementationClass = "AndroidComposeConventionPlugin"
+        }
+
+        register("androidHilt") {
+            id = "site.pritom.dutta.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
         }
         register("createFeature") {
             id = "site.pritom.dutta.create.feature"
