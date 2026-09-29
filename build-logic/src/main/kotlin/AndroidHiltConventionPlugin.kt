@@ -13,8 +13,8 @@ class AndroidHiltConventionPlugin : Plugin<Project>  {
             val versionCatalog = versionCatalog()
 
             with(pluginManager) {
-                apply(versionCatalog.plugins("ksp").get().pluginId)
-                apply(versionCatalog.plugins("hilt").get().pluginId)
+                apply(versionCatalog.plugins("ksp-plugins").get().pluginId)
+                apply(versionCatalog.plugins("hilt-plugins").get().pluginId)
             }
 
             dependencies {
