@@ -18,11 +18,24 @@ class AndroidFeatureConventionPlugin: Plugin<Project> {
                 add("implementation", project(":core:designsystems"))
                 add("implementation", project(":core:common"))
 
+                /* AndroidX Library*/
+                add("implementation", libs.lib("androidx-core-ktx").get())
+                add("implementation", libs.lib("androidx-appcompat").get())
+                add("implementation", libs.lib("material").get())
+
+               /** Hilt and lifecycle Library*/
                 add("implementation", libs.lib("androidx-hilt-navigation-compose").get())
                 add("implementation", libs.lib("androidx-lifecycle-runtime-ktx").get())
                 add("implementation", libs.lib("androidx-lifecycle-viewmodel-compose").get())
                 add("implementation", libs.lib("kotlinx-coroutines-android").get())
+
+                /*
+                * Testing library*/
+                add("testImplementation", libs.lib("junit").get())
+                add("androidTestImplementation", libs.lib("androidx-junit").get())
+                add("androidTestImplementation", libs.lib("androidx-espresso-core").get())
             }
+
         }
     }
 }

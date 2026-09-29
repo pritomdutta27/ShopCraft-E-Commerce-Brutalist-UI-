@@ -1,3 +1,14 @@
+// Fix AGP AndroidLocationsException when both ANDROID_PREFS_ROOT and ANDROID_USER_HOME are set in environment
+try {
+    val env = System.getenv()
+    val field = env.javaClass.getDeclaredField("m")
+    field.isAccessible = true
+    @Suppress("UNCHECKED_CAST")
+    val map = field.get(env) as MutableMap<Any, Any>
+    map.remove("ANDROID_PREFS_ROOT")
+} catch (_: Exception) {
+}
+
 pluginManagement {
     includeBuild("build-logic")
     repositories {

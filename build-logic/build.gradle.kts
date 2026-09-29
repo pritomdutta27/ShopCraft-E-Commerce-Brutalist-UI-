@@ -8,10 +8,10 @@ plugins {
 group = "site.pritom.dutta.convention.buildLogic"
 
 dependencies {
-    compileOnly(libs.android.gradlePlugin)
-    compileOnly(libs.kotlin.gradlePlugin)
-    compileOnly(libs.ksp.gradlePlugin)
-    compileOnly(libs.hilt.gradlePlugin)
+    implementation(libs.android.gradlePlugin)
+    implementation(libs.kotlin.gradlePlugin)
+    implementation(libs.ksp.gradlePlugin)
+    implementation(libs.hilt.gradlePlugin)
 }
 
 gradlePlugin {
@@ -39,6 +39,11 @@ gradlePlugin {
         register("androidFeature") {
             id = "site.pritom.dutta.android.features"
             implementationClass = "AndroidFeatureConventionPlugin"
+        }
+
+        register("androidNetwork") {
+            id = "site.pritom.dutta.android.network"
+            implementationClass = "AndroidNetworkConventionPlugin"
         }
 
         register("createFeature") {

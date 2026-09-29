@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.pritom.android.application)
-    alias(libs.plugins.pritom.android.compose)
 }
 
 android {
@@ -16,18 +15,7 @@ android {
             }
         }
     }
-
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.junit)
 }
