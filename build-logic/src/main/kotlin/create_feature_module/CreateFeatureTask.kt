@@ -82,9 +82,9 @@ abstract class CreateFeatureTask : DefaultTask() {
 
         createDirectories(
             module,
-            "src/main/java/com/yourapp/features/$feature/data/datasource",
-            "src/main/java/com/yourapp/features/$feature/data/mapper",
-            "src/main/java/com/yourapp/features/$feature/data/repository"
+            "src/main/java/site/pritom/features/$feature/data/datasource",
+            "src/main/java/site/pritom/features/$feature/data/mapper",
+            "src/main/java/site/pritom/features/$feature/data/repository"
         )
 
         println("✓ Created :features:$feature:data")
@@ -116,9 +116,9 @@ abstract class CreateFeatureTask : DefaultTask() {
 
         createDirectories(
             module,
-            "src/main/java/com/yourapp/features/$feature/domain/model",
-            "src/main/java/com/yourapp/features/$feature/domain/repository",
-            "src/main/java/com/yourapp/features/$feature/domain/usecase"
+            "src/main/java/site/pritom/features/$feature/domain/model",
+            "src/main/java/site/pritom/features/$feature/domain/repository",
+            "src/main/java/site/pritom/features/$feature/domain/usecase"
         )
 
         println("✓ Created :features:$feature:domain")
@@ -151,10 +151,10 @@ abstract class CreateFeatureTask : DefaultTask() {
 
         createDirectories(
             module,
-            "src/main/java/com/yourapp/features/$feature/presentation/component",
-            "src/main/java/com/yourapp/features/$feature/presentation/navigation",
-            "src/main/java/com/yourapp/features/$feature/presentation/screen",
-            "src/main/java/com/yourapp/features/$feature/presentation/viewmodel"
+            "src/main/java/site/pritom/features/$feature/presentation/component",
+            "src/main/java/site/pritom/features/$feature/presentation/navigation",
+            "src/main/java/site/pritom/features/$feature/presentation/screen",
+            "src/main/java/site/pritom/features/$feature/presentation/viewmodel"
         )
 
         println("✓ Created :features:$feature:presentation")
