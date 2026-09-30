@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.pritom.android.library)
+    alias(libs.plugins.pritom.android.features)
 }
 
 android {
