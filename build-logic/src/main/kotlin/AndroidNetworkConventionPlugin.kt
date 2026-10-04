@@ -18,6 +18,7 @@ class AndroidNetworkConventionPlugin: Plugin<Project> {
             }
 
             dependencies {
+                /** Bundle */
                 add("implementation", versionCatalog.bundle("network-call"))
 //                add("implementation", versionCatalog.lib("retrofit-core").get())
 //                add("implementation", versionCatalog.lib("retrofit-kotlin-serialization").get())

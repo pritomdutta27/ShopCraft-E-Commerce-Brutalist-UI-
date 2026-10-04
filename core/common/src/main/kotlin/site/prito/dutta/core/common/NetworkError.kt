@@ -1,4 +1,4 @@
-package site.pritom.network.utils
+package site.prito.dutta.core.common
 
 /** Created by Pritom Dutta on 30/9/26 */
 sealed interface NetworkError {

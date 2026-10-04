@@ -7,5 +7,11 @@ android {
 }
 
 dependencies {
+    /** own Library*/
     implementation(project(":features:home:domain"))
+    implementation(project(":core:common"))
+    implementation(project(":core:network"))
+
+    implementation(libs.androidx.paging.runtime)
+    testImplementation(libs.androidx.paging.common)
 }

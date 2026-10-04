@@ -2,6 +2,8 @@ package site.pritom.network.utils
 
 import retrofit2.HttpException
 import retrofit2.Response
+import site.prito.dutta.core.common.NetworkError
+import site.prito.dutta.core.common.NetworkResult
 import site.pritom.network.interceptor.NoInternetException
 import java.io.IOException
 import java.net.SocketTimeoutException
