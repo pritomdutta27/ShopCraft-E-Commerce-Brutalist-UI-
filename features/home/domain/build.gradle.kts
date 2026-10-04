@@ -7,4 +7,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:common"))
+
+    implementation(libs.androidx.paging.runtime)
+    testImplementation(libs.androidx.paging.common)
 }
