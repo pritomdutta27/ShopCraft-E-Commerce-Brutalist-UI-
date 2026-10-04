@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.pritom.android.library)
+    alias(libs.plugins.pritom.android.hilt)
 }
 
 android {
