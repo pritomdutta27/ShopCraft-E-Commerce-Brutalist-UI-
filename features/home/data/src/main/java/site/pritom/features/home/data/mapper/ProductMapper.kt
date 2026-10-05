@@ -7,6 +7,7 @@ import site.pritom.features.home.domain.model.Product
 
 fun ProductDto.toDomainProduct(): Product{
     return Product(
+        id = id,
         title = title,
         productImage = thumbnail,
         price = price,

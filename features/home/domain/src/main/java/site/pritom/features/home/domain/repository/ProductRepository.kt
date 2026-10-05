@@ -7,5 +7,5 @@ import site.pritom.features.home.domain.model.Product
 /** Created by Pritom Dutta on 1/10/26 */
 interface ProductRepository {
 
-    suspend fun getProducts(): Flow<PagingData<Product>>
+    fun getProducts(): Flow<PagingData<Product>>
 }

@@ -46,6 +46,7 @@ class AndroidComposeConventionPlugin: Plugin<Project> {
                 add("implementation", versionCatalog.lib("androidx-compose-ui-tooling-preview").get())
                 add("implementation", versionCatalog.lib("androidx-compose-material3").get())
                 add("implementation", versionCatalog.lib("androidx-activity-compose").get())
+                add("implementation", versionCatalog.lib("androidx-compose-foundation").get())
                 add("implementation", versionCatalog.lib("androidx-lifecycle-runtime-ktx").get())
                 add("implementation", versionCatalog.lib("androidx-lifecycle-viewmodel-compose").get())
 
