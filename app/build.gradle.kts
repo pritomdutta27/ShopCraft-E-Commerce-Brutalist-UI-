@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.pritom.android.application)
+    alias(libs.plugins.pritom.android.compose)
 }
 
 android {
@@ -18,4 +19,5 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:common"))
 }
