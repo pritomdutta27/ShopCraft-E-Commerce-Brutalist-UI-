@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,6 +16,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -45,6 +49,7 @@ import coil.request.SuccessResult
 import site.pritom.designsystems.BrutalistContainer
 import site.pritom.designsystems.components.home.CategoryHome
 import site.pritom.designsystems.components.home.FilterItem
+import site.pritom.designsystems.components.home.ProductGridItem
 import site.pritom.designsystems.components.home.SubHome
 import site.pritom.designsystems.components.home_toolbar.HomeToolBar
 import site.pritom.designsystems.components.search.SearchComponent
@@ -62,165 +67,81 @@ fun HomeScreen(
     val products = uiState.products
         .collectAsLazyPagingItems()
 
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(Color(0xFFF9F9FF)),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        modifier = Modifier.fillMaxSize().background(Color.White),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(bottom = 16.dp)
     ) {
+        item(
 
-        HomeToolBar()
-
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(2.dp)
-                .background(Color.Black)
-        )
-
-        LazyColumn{
-
-            item {
-                SearchComponent(
-                    modifier = Modifier
-                        .padding(start = 15.dp, end = 15.dp)
-                )
-
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(12.dp)
-                )
-
-                SubHome()
-
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(12.dp)
-                )
-
-                LazyRow(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentPadding = PaddingValues(
-                        start = 16.dp,
-                        end = 16.dp
-                    ),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
-                ) {
-                    item{
-                        FilterItem()
-                    }
-
-                    items(4){
-                        CategoryHome()
-                    }
-                }
-
-
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(16.dp)
-                )
+            span = {
+                GridItemSpan(maxLineSpan)
             }
-
-            items(
-                count = products.itemCount,
-                key = { index ->
-                    products[index]?.id ?: index
-                }
-            ) { index ->
-                products[index]?.let { product ->
-                    ProductItem(
-                        product,
-                        onClick ={ }
-                    )
-                }
-            }
-        }
-    }
-
-}
-
-@Composable
-fun ProductItem(
-    product: Product,
-    onClick: (Product) -> Unit,
-    modifier: Modifier = Modifier
-) {
-
-    val backgroundColor = rememberDominantColor(
-        product.productImage
-    )
-
-    Column {
-
-
-        Card(
-            modifier = modifier
-                .fillMaxWidth()
-                .clickable {
-                    onClick(product)
-                }
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
+            HomeToolBar()
+        }
+
+        // Search
+        item(
+
+            span = {
+                GridItemSpan(maxLineSpan)
+            }
+        ) {
+            SearchComponent(
+                modifier = Modifier.padding(horizontal = 15.dp)
+            )
+        }
+
+        // SubHome
+        item(
+            span = {
+                GridItemSpan(maxLineSpan)
+            }
+        ) {
+            SubHome()
+        }
+
+        // Categories
+        item(
+            span = {
+                GridItemSpan(maxLineSpan)
+            }
+        ) {
+            LazyRow(
+                contentPadding = PaddingValues(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
 
-                AsyncImage(
-                    model = product.productImage,
-                    contentDescription = product.title,
-                    modifier = Modifier
-                        .size(100.dp)
-                        .background(backgroundColor)
-                        .clip(RoundedCornerShape(12.dp)),
-                    contentScale = ContentScale.Crop
-                )
-
-                Spacer(
-                    modifier = Modifier.width(16.dp)
-                )
-
-                Column(
-                    modifier = Modifier.weight(1f)
-                ) {
-
-                    Text(
-                        text = product.title,
-                        style = MaterialTheme.typography.displayMedium,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-
-                    Spacer(
-                        modifier = Modifier.height(4.dp)
-                    )
-
-                    Text(
-                        text = product.price.toString(),
-                        style = MaterialTheme.typography.bodyMedium,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
-                    )
-
-                    Spacer(
-                        modifier = Modifier.height(8.dp)
-                    )
-
-                    Text(
-                        text = "$${product.price}",
-                        style = MaterialTheme.typography.titleSmall
-                    )
+                item {
+                    FilterItem()
                 }
+
+                items(4) {
+                    CategoryHome()
+                }
+            }
+        }
+
+        // Products
+        items(
+            count = products.itemCount,
+            key = { index ->
+                products[index]?.id ?: "placeholder-$index"
+            }
+        ) { index ->
+
+            products[index]?.let { product ->
+                ProductGridItem()
             }
         }
     }
 
 }
+
+
 
 @Composable
 fun rememberDominantColor(
