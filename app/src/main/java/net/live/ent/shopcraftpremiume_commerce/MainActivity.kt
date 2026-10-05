@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
-import net.live.ent.shopcraftpremiume_commerce.ui.theme.ShopCraftPremiumECommerceTheme
+import site.pritom.designsystems.theme.ShopCraftPremiumECommerceTheme
 import site.pritom.features.home.presentation.screen.HomeScreen
 
 @AndroidEntryPoint

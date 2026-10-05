@@ -1,16 +1,24 @@
 package site.pritom.features.home.presentation.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -38,6 +46,13 @@ import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.request.SuccessResult
+import site.pritom.designsystems.BrutalistContainer
+import site.pritom.designsystems.components.home.CategoryHome
+import site.pritom.designsystems.components.home.FilterItem
+import site.pritom.designsystems.components.home.ProductGridItem
+import site.pritom.designsystems.components.home.SubHome
+import site.pritom.designsystems.components.home_toolbar.HomeToolBar
+import site.pritom.designsystems.components.search.SearchComponent
 import site.pritom.features.home.domain.model.Product
 import site.pritom.features.home.presentation.viewmodel.HomeViewModel
 
@@ -52,105 +67,81 @@ fun HomeScreen(
     val products = uiState.products
         .collectAsLazyPagingItems()
 
-    LazyColumn(
-        modifier = modifier.fillMaxWidth()
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        modifier = Modifier.fillMaxSize().background(Color.White),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(bottom = 16.dp)
     ) {
+        item(
 
-        item {
-            Column {
-                // Your content
+            span = {
+                GridItemSpan(maxLineSpan)
+            }
+        ) {
+            HomeToolBar()
+        }
+
+        // Search
+        item(
+
+            span = {
+                GridItemSpan(maxLineSpan)
+            }
+        ) {
+            SearchComponent(
+                modifier = Modifier.padding(horizontal = 15.dp)
+            )
+        }
+
+        // SubHome
+        item(
+            span = {
+                GridItemSpan(maxLineSpan)
+            }
+        ) {
+            SubHome()
+        }
+
+        // Categories
+        item(
+            span = {
+                GridItemSpan(maxLineSpan)
+            }
+        ) {
+            LazyRow(
+                contentPadding = PaddingValues(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+
+                item {
+                    FilterItem()
+                }
+
+                items(4) {
+                    CategoryHome()
+                }
             }
         }
 
+        // Products
         items(
             count = products.itemCount,
             key = { index ->
-                products[index]?.id ?: index
+                products[index]?.id ?: "placeholder-$index"
             }
         ) { index ->
 
             products[index]?.let { product ->
-                 ProductItem(
-                     product,
-                     onClick ={ }
-                 )
+                ProductGridItem()
             }
         }
     }
+
 }
 
-@Composable
-fun ProductItem(
-    product: Product,
-    onClick: (Product) -> Unit,
-    modifier: Modifier = Modifier
-) {
 
-    val backgroundColor = rememberDominantColor(
-        product.productImage
-    )
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .clickable {
-                onClick(product)
-            }
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            AsyncImage(
-                model = product.productImage,
-                contentDescription = product.title,
-                modifier = Modifier
-                    .size(100.dp)
-                    .background(backgroundColor)
-                    .clip(RoundedCornerShape(12.dp)),
-                contentScale = ContentScale.Crop
-            )
-
-            Spacer(
-                modifier = Modifier.width(16.dp)
-            )
-
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-
-                Text(
-                    text = product.title,
-                    style = MaterialTheme.typography.titleMedium,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-
-                Spacer(
-                    modifier = Modifier.height(4.dp)
-                )
-
-                Text(
-                    text = product.price.toString(),
-                    style = MaterialTheme.typography.bodyMedium,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
-
-                Spacer(
-                    modifier = Modifier.height(8.dp)
-                )
-
-                Text(
-                    text = "$${product.price}",
-                    style = MaterialTheme.typography.titleSmall
-                )
-            }
-        }
-    }
-}
 
 @Composable
 fun rememberDominantColor(

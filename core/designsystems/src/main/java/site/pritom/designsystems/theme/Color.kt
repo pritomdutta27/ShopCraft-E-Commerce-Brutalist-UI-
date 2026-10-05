@@ -1,4 +1,4 @@
-package net.live.ent.shopcraftpremiume_commerce.ui.theme
+package site.pritom.designsystems.theme
 
 import androidx.compose.ui.graphics.Color
 
