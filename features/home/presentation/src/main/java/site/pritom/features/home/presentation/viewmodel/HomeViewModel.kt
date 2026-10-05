@@ -31,9 +31,9 @@ class HomeViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(ProductListUiState())
     val uiState: StateFlow<ProductListUiState> = _uiState.asStateFlow()
 
-    val products: Flow<PagingData<Product>> =
-        getProductListUseCase()
-            .cachedIn(viewModelScope)
+//    val products: Flow<PagingData<Product>> =
+//        getProductListUseCase()
+//            .cachedIn(viewModelScope)
 
     init {
         viewModelScope.launch {

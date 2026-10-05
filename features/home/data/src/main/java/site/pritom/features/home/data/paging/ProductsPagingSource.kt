@@ -12,11 +12,11 @@ private const val STARTING_KEY = 0
 private const val LOAD_DELAY_MILLIS = 3_000L
 
 class ProductsPagingSource(
-    private val api: ProductRemoteDataSource
+    private val api: ProductRemoteDataSource,
 ) : PagingSource<Int, Product>() {
 
     override suspend fun load(
-        params: LoadParams<Int>
+        params: LoadParams<Int>,
     ): LoadResult<Int, Product> {
 
         return try {
@@ -30,21 +30,23 @@ class ProductsPagingSource(
 
             val response = api.getProductList(
                 limit = limit,
-                skip = skip
+                skip = skip,
             )
 
             if (!response.isSuccessful) {
                 return LoadResult.Error(
-                    HttpException(response)
+                    HttpException(response),
                 )
             }
 
             val body = response.body()
                 ?: return LoadResult.Error(
-                    IllegalStateException("Empty response body")
+                    IllegalStateException("Empty response body"),
                 )
 
-            val products = body.products.map { it.toDomainProduct() }
+            val products = body.products.map {
+                it.toDomainProduct()
+            }
 
             LoadResult.Page(
                 data = products,
@@ -56,7 +58,7 @@ class ProductsPagingSource(
                 } else {
                     maxOf(
                         STARTING_KEY,
-                        skip - limit
+                        skip - limit,
                     )
                 },
 
@@ -69,7 +71,7 @@ class ProductsPagingSource(
                     null
                 } else {
                     skip + products.size
-                }
+                },
             )
 
         } catch (e: IOException) {
@@ -84,14 +86,14 @@ class ProductsPagingSource(
     }
 
     override fun getRefreshKey(
-        state: PagingState<Int, Product>
+        state: PagingState<Int, Product>,
     ): Int? {
 
         val anchorPosition = state.anchorPosition
             ?: return null
 
         val anchorItem = state.closestItemToPosition(
-            anchorPosition
+            anchorPosition,
         ) ?: return null
 
         /*
@@ -111,7 +113,7 @@ class ProductsPagingSource(
          */
         return maxOf(
             STARTING_KEY,
-            anchorPosition - (state.config.pageSize / 2)
+            anchorPosition - (state.config.pageSize / 2),
         )
     }
 }

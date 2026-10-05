@@ -1,5 +1,7 @@
 package site.pritom.designsystems.components.home
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,26 +22,51 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.palette.graphics.Palette
 import coil.compose.AsyncImage
 import site.pritom.designsystems.BrutalistContainer
 import site.pritom.designsystems.R
 import site.pritom.designsystems.components.discount.DiscountImageTopWithFavButton
 import site.pritom.designsystems.components.discount.DiscountPriceText
 import site.pritom.designsystems.components.rating.RatingWithStarAndCommentCount
+import site.pritom.designsystems.utils.ImageUtils
 
 @Composable
-fun ProductGridItem() {
+fun ProductGridItem(
+    modifier: Modifier = Modifier,
+    productImage: String = "",
+    imageBackgroundColor: Int = 0,
+    title: String = "",
+    brandName: String = "",
+    ratingTxt: Double = 0.0,
+    totalComment: Int = 0,
+    price: String = "",
+    afterDiscountPrice: String = "",
+    discountPercentage: String = "",
+    isAvailable: String = "",
+    quality: Int = 0,
+) {
+
+    var backgroundColor by remember {
+        mutableStateOf(Color.White)
+    }
     BrutalistContainer(
         modifier = Modifier.fillMaxWidth(),
     ) {
@@ -48,16 +75,25 @@ fun ProductGridItem() {
 
             Box {
 
-                Image(
-                    painter = painterResource(id = R.drawable.demo),
+                AsyncImage(
+                    model = productImage,
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp),
+                        .height(200.dp)
+                        .background(backgroundColor),
                     contentScale = ContentScale.Crop,
+                    onSuccess = {
+                        val bitmap = (it.result.drawable as BitmapDrawable).bitmap.copy(
+                            Bitmap.Config.ARGB_8888, true,
+                        )
+                        backgroundColor = ImageUtils.parseColorSwatch(
+                            Palette.from(bitmap).generate().dominantSwatch,
+                        )
+                    },
                 )
 
-                DiscountImageTopWithFavButton()
+                DiscountImageTopWithFavButton(discountPercentage = discountPercentage)
             }
 
 
@@ -74,18 +110,18 @@ fun ProductGridItem() {
                 verticalArrangement = Arrangement.spacedBy(6.dp),
             ) {
                 Text(
-                    text = "AURA GLOW",
+                    text = brandName,
                     style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Normal),
                     color = Color.Black,
                 )
 
                 Text(
-                    text = "Essence Mascara…",
+                    text = title,
                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Black),
                     color = Color.Black,
                 )
 
-                RatingWithStarAndCommentCount()
+                RatingWithStarAndCommentCount(rating = ratingTxt, commentCount = totalComment)
 
                 Box(
                     modifier = Modifier
@@ -107,7 +143,7 @@ fun ProductGridItem() {
                         ),
                 )
 
-                CircleWithText(text = "99 available")
+                CircleWithText(text = "$quality $isAvailable")
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -115,7 +151,10 @@ fun ProductGridItem() {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
 
-                    DiscountPriceText()
+                    DiscountPriceText(
+                        price = price,
+                        afterDiscountPrice = afterDiscountPrice,
+                    )
 
                     BrutalistContainer(
                         contentPadding = PaddingValues(2.dp),

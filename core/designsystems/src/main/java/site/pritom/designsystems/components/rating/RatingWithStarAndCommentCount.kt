@@ -7,6 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -17,7 +18,11 @@ import site.pritom.designsystems.R
 /** Created by Pritom Dutta on 5/10/26 */
 
 @Composable
-fun RatingWithStarAndCommentCount() {
+fun RatingWithStarAndCommentCount(
+    modifier: Modifier = Modifier,
+    rating: Double = 0.0,
+    commentCount: Int = 0
+) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(3.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -28,13 +33,13 @@ fun RatingWithStarAndCommentCount() {
             contentDescription = "Rating Star",
         )
         Text(
-            text = "2.56",
+            text = "$rating",
             style = MaterialTheme.typography.labelMedium,
             color = Color.Black
         )
 
         Text(
-            text = "(3)",
+            text = "($commentCount)",
             color = Color.Black.copy(alpha = 0.5f),
             style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Normal)
         )
