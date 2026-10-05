@@ -33,24 +33,8 @@ fun SubHome() {
             .fillMaxWidth()
             .padding(start = 15.dp, end = 15.dp)
     ) {
-        Row(
-            horizontalArrangement = Arrangement.Absolute.spacedBy(2.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(10.dp)
-                    .clip(RoundedCornerShape(50))
-                    .background(Color(0xFF62FAE3))
-                    .border(1.dp, Color.Black, RoundedCornerShape(50))
-            )
 
-            Text(
-                text = "REST API /PRODUCTS",
-                style = MaterialTheme.typography.labelSmall,
-                color = Color.Black
-            )
-        }
+        CircleWithText(text = "REST API /PRODUCTS")
 
         Spacer(
             modifier = Modifier

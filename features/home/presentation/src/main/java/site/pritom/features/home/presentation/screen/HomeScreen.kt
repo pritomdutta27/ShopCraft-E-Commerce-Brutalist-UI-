@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -22,6 +23,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -59,7 +61,7 @@ import site.pritom.features.home.presentation.viewmodel.HomeViewModel
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState
         .collectAsStateWithLifecycle()
@@ -67,85 +69,95 @@ fun HomeScreen(
     val products = uiState.products
         .collectAsLazyPagingItems()
 
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        modifier = Modifier.fillMaxSize().background(Color.White),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(bottom = 16.dp)
-    ) {
-        item(
-
-            span = {
-                GridItemSpan(maxLineSpan)
-            }
-        ) {
+    Scaffold(
+        topBar = {
             HomeToolBar()
-        }
-
-        // Search
-        item(
-
-            span = {
-                GridItemSpan(maxLineSpan)
-            }
+        },
+    ) { paddingValue ->
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            modifier = modifier
+                .fillMaxSize()
+                .background(Color.White)
+                .padding(paddingValue),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(
+                bottom = 16.dp,
+            ),
         ) {
-            SearchComponent(
-                modifier = Modifier.padding(horizontal = 15.dp)
-            )
-        }
 
-        // SubHome
-        item(
-            span = {
-                GridItemSpan(maxLineSpan)
-            }
-        ) {
-            SubHome()
-        }
+            // Search
+            item(
 
-        // Categories
-        item(
-            span = {
-                GridItemSpan(maxLineSpan)
-            }
-        ) {
-            LazyRow(
-                contentPadding = PaddingValues(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                span = {
+                    GridItemSpan(maxLineSpan)
+                },
             ) {
 
-                item {
-                    FilterItem()
-                }
+                SearchComponent(
+                    modifier = Modifier
+                        .padding(horizontal = 15.dp)
+                        .padding(top = 20.dp),
+                )
+            }
 
-                items(4) {
-                    CategoryHome()
+            // SubHome
+            item(
+                span = {
+                    GridItemSpan(maxLineSpan)
+                },
+            ) {
+                SubHome()
+            }
+
+            // Categories
+            item(
+                span = {
+                    GridItemSpan(maxLineSpan)
+                },
+            ) {
+                LazyRow(
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                ) {
+
+                    item {
+                        FilterItem()
+                    }
+
+                    items(4) {
+                        CategoryHome()
+                    }
                 }
             }
-        }
 
-        // Products
-        items(
-            count = products.itemCount,
-            key = { index ->
-                products[index]?.id ?: "placeholder-$index"
-            }
-        ) { index ->
-
-            products[index]?.let { product ->
-                ProductGridItem()
+            // Products
+            items(
+                count = products.itemCount,
+                key = { index ->
+                    products[index]?.id ?: "placeholder-$index"
+                },
+            ) { index ->
+                Box(
+                    modifier = Modifier.padding(
+                        start = if (index % 2 == 0) 15.dp else 0.dp,
+                        end = if (index % 2 == 1) 15.dp else 0.dp,
+                    ),
+                ) {
+                    products[index]?.let { product ->
+                        ProductGridItem()
+                    }
+                }
             }
         }
     }
-
 }
-
 
 
 @Composable
 fun rememberDominantColor(
-    imageUrl: String
+    imageUrl: String,
 ): Color {
 
     val context = LocalContext.current
@@ -176,8 +188,8 @@ fun rememberDominantColor(
 
             color = Color(
                 palette.getDominantColor(
-                    android.graphics.Color.LTGRAY
-                )
+                    android.graphics.Color.LTGRAY,
+                ),
             )
         }
     }
