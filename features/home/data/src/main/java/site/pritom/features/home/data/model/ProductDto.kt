@@ -2,7 +2,7 @@ package site.pritom.features.home.data.model
 
 data class ProductDto(
     val availabilityStatus: String,
-    val brand: String,
+    val brand: String?,
     val category: String,
     val description: String,
     val dimensions: Dimensions,

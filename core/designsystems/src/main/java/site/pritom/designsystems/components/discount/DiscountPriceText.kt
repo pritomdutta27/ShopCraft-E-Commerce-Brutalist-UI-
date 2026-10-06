@@ -7,6 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -18,22 +19,26 @@ import site.pritom.designsystems.R
 /** Created by Pritom Dutta on 5/10/26 */
 
 @Composable
-fun DiscountPriceText() {
+fun DiscountPriceText(
+    modifier: Modifier = Modifier,
+    price: String = "0.00",
+    afterDiscountPrice: String = "0.00",
+) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(3.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            text = "$24.00",
+            text = "$$afterDiscountPrice",
             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Black),
-            color = Color.Black
+            color = Color.Black,
         )
 
         Text(
-            text = "$80.00",
+            text = "$$price",
             color = Color.Black.copy(alpha = 0.5f),
             style = MaterialTheme.typography.labelSmall,
-            textDecoration = TextDecoration.LineThrough
+            textDecoration = TextDecoration.LineThrough,
         )
     }
 

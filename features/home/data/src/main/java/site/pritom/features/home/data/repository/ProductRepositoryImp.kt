@@ -15,13 +15,15 @@ import javax.inject.Inject
  * */
 
 class ProductRepositoryImpl @Inject constructor(
-    private val remoteDataSource: ProductRemoteDataSource
+    private val remoteDataSource: ProductRemoteDataSource,
 ) : ProductRepository {
     override fun getProducts(): Flow<PagingData<Product>> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {
-                ProductsPagingSource(remoteDataSource)
+                ProductsPagingSource(
+                    remoteDataSource
+                )
             }
         ).flow
     }

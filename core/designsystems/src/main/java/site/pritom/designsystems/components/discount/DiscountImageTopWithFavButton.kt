@@ -23,6 +23,7 @@ import site.pritom.designsystems.BrutalistContainer
 @Composable
 fun DiscountImageTopWithFavButton(
     modifier: Modifier = Modifier,
+    discountPercentage: String = "0",
 ) {
     Row(
         modifier = modifier
@@ -38,7 +39,7 @@ fun DiscountImageTopWithFavButton(
             backgroundColor = Color(0xFFFFDADB),
         ) {
             Text(
-                "10.48% OFF",
+                "$discountPercentage% OFF",
                 style = MaterialTheme.typography.labelSmall,
                 color = Color.Black,
             )
