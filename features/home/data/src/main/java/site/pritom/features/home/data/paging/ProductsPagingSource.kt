@@ -2,11 +2,13 @@ package site.pritom.features.home.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import kotlinx.coroutines.delay
 import retrofit2.HttpException
 import site.pritom.features.home.data.datasource.ProductRemoteDataSource
 import site.pritom.features.home.data.mapper.toDomainProduct
 import site.pritom.features.home.domain.model.Product
 import java.io.IOException
+import kotlin.time.Duration.Companion.milliseconds
 
 private const val STARTING_KEY = 0
 private const val LOAD_DELAY_MILLIS = 3_000L
@@ -47,6 +49,9 @@ class ProductsPagingSource(
             val products = body.products.map {
                 it.toDomainProduct()
             }
+
+            if(skip > 1)
+                delay(1000.milliseconds)
 
             LoadResult.Page(
                 data = products,
