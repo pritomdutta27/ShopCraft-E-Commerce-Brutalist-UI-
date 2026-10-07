@@ -32,6 +32,7 @@ fun BrutalistContainer(
     shadowOffset: DpOffset = DpOffset(3.dp, 3.dp),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     contentAlignment: Alignment = Alignment.Center,
+    isShowShadow: Boolean = true,
     content: @Composable BoxScope.() -> Unit
 ) {
     val shape = RoundedCornerShape(cornerRadius)
@@ -39,17 +40,19 @@ fun BrutalistContainer(
     Box(
         modifier = modifier
             .drawBehind {
-                drawRoundRect(
-                    color = shadowColor,
-                    topLeft = Offset(
-                        x = shadowOffset.x.toPx(),
-                        y = shadowOffset.y.toPx()
-                    ),
-                    size = size,
-                    cornerRadius = CornerRadius(
-                        cornerRadius.toPx()
+                if (isShowShadow) {
+                    drawRoundRect(
+                        color = shadowColor,
+                        topLeft = Offset(
+                            x = shadowOffset.x.toPx(),
+                            y = shadowOffset.y.toPx()
+                        ),
+                        size = size,
+                        cornerRadius = CornerRadius(
+                            cornerRadius.toPx()
+                        )
                     )
-                )
+                }
             }
             .clip(shape)
             .background(backgroundColor)

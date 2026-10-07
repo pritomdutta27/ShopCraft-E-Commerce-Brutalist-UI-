@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 /** Created by Pritom Dutta on 5/10/26 */
@@ -41,4 +42,11 @@ fun CircleWithText(
             color = Color.Black
         )
     }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun CircleWithTextPreview() {
+    CircleWithText(text = "Sample Text")
 }
