@@ -11,6 +11,7 @@ kotlin = "2.4.20"
 composeBom = "2026.09.00"
 appcompat = "1.8.0"
 material = "1.14.0"
+androidxComposeMaterial3Adaptive = "1.3.0"
 paging_version = "3.5.1"
 composeNavigation = "2.9.8"
 androidxHiltNavigationCompose = "1.4.0"
@@ -37,6 +38,8 @@ applicationId = "net.live.ent.shopcraftpremiume_commerce"
 foundation = "1.12.1"
 paletteKtx = "1.0.0"
 animationGraphics = "1.12.1"
+material3Adaptive = "1.0.0-alpha06"
+material3WindowSizeClass = "1.4.0"
 
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
@@ -61,6 +64,11 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-material-icons-core = { group = "androidx.compose.material", name = "material-icons-core" }
 # Extended Icons (Contains the full set of thousands of icons)
 androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+
+#Adaptive
+androidx-compose-material3-adaptive = { group = "androidx.compose.material3.adaptive", name = "adaptive", version.ref = "androidxComposeMaterial3Adaptive" }
+androidx-compose-material3-adaptive-layout = { group = "androidx.compose.material3.adaptive", name = "adaptive-layout", version.ref = "androidxComposeMaterial3Adaptive" }
+androidx-compose-material3-adaptive-navigation = { group = "androidx.compose.material3.adaptive", name = "adaptive-navigation", version.ref = "androidxComposeMaterial3Adaptive" }
 
 #Hilt
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
@@ -97,6 +105,8 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 androidx-palette-ktx = { group = "androidx.palette", name = "palette-ktx", version.ref = "paletteKtx" }
 androidx-compose-animation-graphics = { group = "androidx.compose.animation", name = "animation-graphics", version.ref = "animationGraphics" }
+androidx-material3-adaptive = { group = "androidx.compose.material3", name = "material3-adaptive", version.ref = "material3Adaptive" }
+androidx-compose-material3-window-size-class1 = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "material3WindowSizeClass" }
 
 
 [plugins]
@@ -118,3 +128,4 @@ pritom-android-network = { id = "site.pritom.dutta.android.network" }
 
 [bundles]
 network-call = ["retrofit-core","retrofit-kotlin-serialization", "retrofit-converter-gson", "okhttp-logging", "okhttp-core", "kotlinx-serialization-json" ]
+compose-adavtive = ["androidx-compose-material3-adaptive", "androidx-compose-material3-adaptive-layout", "androidx-compose-material3-adaptive-navigation"]
