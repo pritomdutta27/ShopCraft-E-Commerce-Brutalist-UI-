@@ -67,30 +67,7 @@ fun SubHome() {
                 color = Color.Black.copy(alpha = 0.6f)
             )
 
-            BrutalistContainer(
-                contentPadding = PaddingValues(10.dp)
-            ) {
-
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(2.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(10.dp)
-                            .clip(RoundedCornerShape(50))
-                            .background(Color(0xFF62FAE3))
-                            .border(1.dp, Color.Black, RoundedCornerShape(50))
-                    )
-
-                    Text(
-                        text = "194 items",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = Color.Black
-                    )
-                }
-
-            }
+            ItemCountComponent()
         }
     }
 

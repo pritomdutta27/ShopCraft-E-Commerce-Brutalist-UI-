@@ -2,11 +2,15 @@ package site.pritom.designsystems.components.home_toolbar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -32,81 +36,102 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import site.pritom.designsystems.BrutalistContainer
+import site.pritom.designsystems.components.home.Line
+import site.pritom.designsystems.components.search.SearchComponent
 
 
 @Composable
 fun HomeToolBar(
-
+    isShowSearchField: Boolean = false
 ) {
-    Row(
-        modifier = Modifier.fillMaxWidth()
-            .padding(10.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
-            Text(
-                text = "Dummy",
-                style = MaterialTheme.typography.headlineSmall,
-                color = Color.Black
-            )
-            Text(
-                text = "Json",
-                modifier = Modifier
-                    .clip(RoundedCornerShape(4.dp))
-                    .background(Color.Black)
-                    .padding(start = 2.dp, end = 2.dp),
-                style = MaterialTheme.typography.headlineSmall,
-                color = Color.White
-            )
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+                Text(
+                    text = "Dummy",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = Color.Black
+                )
+                Text(
+                    text = "Json",
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(4.dp))
+                        .background(Color.Black)
+                        .padding(start = 2.dp, end = 2.dp),
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = Color.White
+                )
+            }
+
+            if (isShowSearchField) {
+                SearchComponent(
+                    modifier = Modifier.width(400.dp),
+                    isShowShadow = false
+                )
+            }
+
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+
+                if (!isShowSearchField) {
+                    BrutalistContainer(
+                        contentPadding = PaddingValues(2.dp),
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "Search",
+                            tint = Color.Black,
+                            modifier = Modifier.padding(4.dp)
+                        )
+                    }
+                }
+
+                BrutalistContainer(
+                    contentPadding = PaddingValues(2.dp),
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.FavoriteBorder,
+                        contentDescription = "Favorite",
+                        tint = Color.Black,
+                        modifier = Modifier.padding(4.dp)
+                    )
+                }
+
+                BrutalistContainer(
+                    contentPadding = PaddingValues(2.dp),
+                    backgroundColor = Color(0xFF9BA3EB)
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.ShoppingBag,
+                        contentDescription = "Shopping",
+                        tint = Color.Black,
+                        modifier = Modifier.padding(4.dp)
+                    )
+                }
+
+                BrutalistContainer(
+                    contentPadding = PaddingValues(2.dp),
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Person,
+                        contentDescription = "Shopping",
+                        tint = Color.Black,
+                        modifier = Modifier.padding(4.dp)
+                    )
+                }
+            }
         }
 
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            BrutalistContainer(
-                contentPadding = PaddingValues(2.dp),
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Search",
-                    tint = Color.Black,
-                    modifier = Modifier.padding(4.dp)
-                )
-            }
-
-            BrutalistContainer(
-                contentPadding = PaddingValues(2.dp),
-            ) {
-                Icon(
-                    imageVector = Icons.Default.FavoriteBorder,
-                    contentDescription = "Favorite",
-                    tint = Color.Black,
-                    modifier = Modifier.padding(4.dp)
-                )
-            }
-
-            BrutalistContainer(
-                contentPadding = PaddingValues(2.dp),
-                backgroundColor = Color(0xFF9BA3EB)
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.ShoppingBag,
-                    contentDescription = "Shopping",
-                    tint = Color.Black,
-                    modifier = Modifier.padding(4.dp)
-                )
-            }
-
-            BrutalistContainer(
-                contentPadding = PaddingValues(2.dp),
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = "Shopping",
-                    tint = Color.Black,
-                    modifier = Modifier.padding(4.dp)
-                )
-            }
-        }
+        Line()
     }
 }
 

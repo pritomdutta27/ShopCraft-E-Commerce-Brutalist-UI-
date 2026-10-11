@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -24,14 +25,16 @@ import site.pritom.designsystems.BrutalistContainer
 @Composable
 fun SearchComponent(
     modifier: Modifier = Modifier,
+    isShowShadow: Boolean = true,
 ) {
 
     BrutalistContainer(
-        modifier = modifier
+        modifier = modifier,
+        isShowShadow = isShowShadow
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(start = 15.dp, end = 15.dp)
+            modifier = Modifier.padding(start = 15.dp, end = 15.dp).height(50.dp)
         ) {
             Icon(
                 imageVector = Icons.Default.Search,
