@@ -1,6 +1,5 @@
 package site.pritom.network.utils
 
-import android.util.Log
 import retrofit2.HttpException
 import retrofit2.Response
 import site.prito.dutta.core.common.NetworkError
