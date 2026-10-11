@@ -1,5 +1,6 @@
 package site.pritom.features.home.presentation.screen.mobile
 
+import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemKey
 import site.pritom.designsystems.components.home.CategoryHome
 import site.pritom.designsystems.components.home.FilterItem
 import site.pritom.designsystems.components.home.ProductGridItem
@@ -48,7 +50,7 @@ fun HomeScreenForPhone(
     val uiState by viewModel.uiState
         .collectAsStateWithLifecycle()
 
-    val products = uiState.products
+    val products = viewModel.products
         .collectAsLazyPagingItems()
 
     val pullToRefreshState = rememberPullToRefreshState()
@@ -198,10 +200,7 @@ fun HomeScreenForPhone(
 
                 items(
                     count = products.itemCount,
-                    key = { index ->
-                        products[index]?.id
-                            ?: "placeholder-$index"
-                    },
+                    key =  products.itemKey { it.id },
                 ) { index ->
 
                     val product = products[index]
@@ -246,10 +245,9 @@ fun HomeScreenForPhone(
                 // Pagination Loading
                 // -----------------------------------------------------
 
-                when (products.loadState.append) {
 
-                    is LoadState.Loading -> {
-
+                when(products.loadState.append){
+                    LoadState.Loading -> {
                         item(
                             span = {
                                 GridItemSpan(maxLineSpan)
@@ -262,26 +260,28 @@ fun HomeScreenForPhone(
                             )
                         }
                     }
+                    else -> UInt
+                }
 
-                    is LoadState.Error -> {
-
-                        item(
-                            span = {
-                                GridItemSpan(maxLineSpan)
-                            },
-                        ) {
-                            PaginationError(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
-                                onRetry = {
-                                    products.retry()
-                                },
-                            )
-                        }
+                if (
+                    products.loadState.refresh is LoadState.Error &&
+                    products.itemCount == 0
+                ) {
+                    item(
+                        key = "initial_load_error",
+                        span = { GridItemSpan(maxLineSpan) },
+                    ) {
+                        PaginationError(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            onRetry = products::retry,
+                            message = (
+                                    products.loadState.refresh as LoadState.Error
+                                    ).error.localizedMessage
+                                ?: "Failed to load products",
+                        )
                     }
-
-                    is LoadState.NotLoading -> Unit
                 }
             }
         }
