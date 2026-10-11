@@ -31,44 +31,8 @@ class HomeViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(ProductListUiState())
     val uiState: StateFlow<ProductListUiState> = _uiState.asStateFlow()
 
-//    val products: Flow<PagingData<Product>> =
-//        getProductListUseCase()
-//            .cachedIn(viewModelScope)
-
-    init {
-        viewModelScope.launch {
-            observeProducts()
-        }
-    }
-
-    fun observeProducts() {
-
+    val products: Flow<PagingData<Product>> =
         getProductListUseCase()
             .cachedIn(viewModelScope)
-            .onStart {
-                _uiState.update {
-                    it.copy(
-                        isLoading = true,
-                        errorMessage = null,
-                        isSuccess = false,
-                    )
-                }
-            }.onEach { pagingData ->
-                _uiState.update {
-                    it.copy(
-                        products = flow { emit(pagingData) },
-                        isLoading = false,
-                        isSuccess = true,
-                    )
-                }
-            }.catch { throwable ->
-                _uiState.update {
-                    it.copy(
-                        isLoading = false,
-                        isSuccess = false,
-                        errorMessage = throwable.message,
-                    )
-                }
-            }.launchIn(viewModelScope)
-    }
+
 }
