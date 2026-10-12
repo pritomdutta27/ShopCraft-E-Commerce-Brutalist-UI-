@@ -60,12 +60,12 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
 
                 /** Features Home Library*/
                 add("implementation", project(":features:home:presentation"))
-                add("implementation", project(":features:home:data"))
-                add("implementation", project(":features:home:domain"))
+                add("implementation", project(":features:home:data"))  // for Hilt module discovery
+//                add("implementation", project(":features:home:domain"))
                 /** Features Details Screen Library*/
                 add("implementation", project(":features:details_screen:presentation"))
-                add("implementation", project(":features:details_screen:data"))
-                add("implementation", project(":features:details_screen:domain"))
+                add("implementation", project(":features:details_screen:data")) // for Hilt module discovery
+//                add("implementation", project(":features:details_screen:domain"))
 
                 /**  AndroidX Library*/
                 add("implementation", versionCatalog.lib("androidx-core-ktx").get())

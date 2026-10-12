@@ -1,8 +1,7 @@
 package site.pritom.designsystems.components.home
 
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import androidx.compose.foundation.Image
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,39 +9,34 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.palette.graphics.Palette
 import coil.compose.AsyncImage
 import site.pritom.designsystems.BrutalistContainer
-import site.pritom.designsystems.R
 import site.pritom.designsystems.components.discount.DiscountImageTopWithFavButton
 import site.pritom.designsystems.components.discount.DiscountPriceText
 import site.pritom.designsystems.components.rating.RatingWithStarAndCommentCount
@@ -52,7 +46,7 @@ import site.pritom.designsystems.utils.ImageUtils
 fun ProductGridItem(
     modifier: Modifier = Modifier,
     productImage: String = "",
-    imageBackgroundColor: Int = 0,
+    initialColor: Color = Color.White,
     title: String = "",
     brandName: String = "",
     ratingTxt: Double = 0.0,
@@ -64,11 +58,34 @@ fun ProductGridItem(
     quality: Int = 0,
 ) {
 
-    var backgroundColor by remember {
-        mutableStateOf(Color.White)
+    val context = LocalContext.current
+
+    // 1. Initialize directly from cache if available -> zero flicker on recycle
+    var targetColorArgb by remember(productImage) {
+        mutableIntStateOf(
+            ImageUtils.getCachedColor(productImage) ?: initialColor.toArgb()
+        )
     }
+    // 2. Fetch asynchronously only if uncached
+    LaunchedEffect(productImage) {
+        if (productImage.isNotBlank() && ImageUtils.getCachedColor(productImage) == null) {
+            targetColorArgb = ImageUtils.getDominantColor(
+                context = context,
+                imageUrl = productImage,
+                defaultColor = initialColor.toArgb(),
+            )
+        }
+    }
+    // 3. Smooth animated transition when color resolves
+    val animatedBackgroundColor by animateColorAsState(
+        targetValue = Color(targetColorArgb),
+        animationSpec = tween(durationMillis = 300),
+        label = "ProductCardBgColorAnimation"
+    )
+
     BrutalistContainer(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
+        enabled = true
     ) {
 
         Column {
@@ -81,16 +98,8 @@ fun ProductGridItem(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp)
-                        .background(backgroundColor),
+                        .background(animatedBackgroundColor),
                     contentScale = ContentScale.Crop,
-                    onSuccess = {
-                        val bitmap = (it.result.drawable as BitmapDrawable).bitmap.copy(
-                            Bitmap.Config.ARGB_8888, true,
-                        )
-                        backgroundColor = ImageUtils.parseColorSwatch(
-                            Palette.from(bitmap).generate().dominantSwatch,
-                        )
-                    },
                 )
 
                 DiscountImageTopWithFavButton(discountPercentage = discountPercentage)

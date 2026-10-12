@@ -35,7 +35,6 @@ class ProductsPagingSource(
 
             when (response) {
                 is NetworkResult.Error -> {
-                    Log.e("safeApiCall", "safeApiCall: ${response.error}" )
                     return LoadResult.Error(Exception(response.error.toString()))
                 }
 

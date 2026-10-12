@@ -10,6 +10,9 @@ android {
 dependencies {
     implementation(project(":core:common"))
 
-    implementation(libs.androidx.paging.runtime)
-    testImplementation(libs.androidx.paging.common)
+    /*
+        *Pure Kotlin lib for domain layer
+        *Pure Kotlin, zero Android UI dependencies
+    */
+    implementation(libs.androidx.paging.common)
 }

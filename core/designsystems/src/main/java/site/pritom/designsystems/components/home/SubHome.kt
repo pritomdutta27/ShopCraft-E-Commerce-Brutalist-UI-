@@ -26,7 +26,10 @@ import androidx.compose.ui.unit.dp
 import site.pritom.designsystems.BrutalistContainer
 
 @Composable
-fun SubHome() {
+fun SubHome(
+    modifier: Modifier = Modifier,
+    totalItem: Int = 0
+) {
 
     Column(
         modifier = Modifier
@@ -67,7 +70,7 @@ fun SubHome() {
                 color = Color.Black.copy(alpha = 0.6f)
             )
 
-            ItemCountComponent()
+            ItemCountComponent(totalItem = totalItem)
         }
     }
 

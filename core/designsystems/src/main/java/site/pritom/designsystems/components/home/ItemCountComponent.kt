@@ -21,7 +21,10 @@ import site.pritom.designsystems.BrutalistContainer
 
 
 @Composable
-fun ItemCountComponent() {
+fun ItemCountComponent(
+    modifier: Modifier = Modifier,
+    totalItem: Int = 0
+) {
     BrutalistContainer(
         contentPadding = PaddingValues(10.dp)
     ) {
@@ -39,7 +42,7 @@ fun ItemCountComponent() {
             )
 
             Text(
-                text = "194 items",
+                text = "$totalItem items",
                 style = MaterialTheme.typography.labelSmall,
                 color = Color.Black
             )
@@ -55,7 +58,10 @@ fun ItemCountComponentPreview() {
 
 
 @Composable
-fun ItemCountComponentForTab(){
+fun ItemCountComponentForTab(
+    modifier: Modifier = Modifier,
+    totalItem: Int = 0
+){
 
     BrutalistContainer(
         contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp),
@@ -67,7 +73,7 @@ fun ItemCountComponentForTab(){
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "194 items",
+                text = "$totalItem items",
                 style = MaterialTheme.typography.labelSmall,
                 color = Color.Black
             )
