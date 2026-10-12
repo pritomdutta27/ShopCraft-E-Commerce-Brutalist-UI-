@@ -85,6 +85,7 @@ fun ProductGridItem(
 
     BrutalistContainer(
         modifier = modifier.fillMaxWidth(),
+        enabled = true
     ) {
 
         Column {
