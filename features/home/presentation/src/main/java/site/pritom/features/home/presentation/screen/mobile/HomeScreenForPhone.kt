@@ -219,7 +219,6 @@ fun HomeScreenForPhone(
 
                             ProductGridItem(
                                 productImage = it.productImage,
-                                imageBackgroundColor = it.backgroundColor,
                                 title = it.title,
                                 brandName = it.brand,
                                 ratingTxt = it.rating,
