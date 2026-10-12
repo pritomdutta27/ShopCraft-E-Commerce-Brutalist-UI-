@@ -16,6 +16,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 abstract class ProductModule {
 
+    @Singleton
     @Binds
     abstract fun bindProductRepository(
         impl: ProductRepositoryImpl
