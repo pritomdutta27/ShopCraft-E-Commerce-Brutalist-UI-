@@ -28,6 +28,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
+import site.pritom.designsystems.components.error.ErrorWithRetryButton
 import site.pritom.designsystems.components.home.CategoryHome
 import site.pritom.designsystems.components.home.FilterItem
 import site.pritom.designsystems.components.home.ProductGridItem
@@ -36,7 +37,6 @@ import site.pritom.designsystems.components.home_toolbar.HomeToolBar
 import site.pritom.designsystems.components.loading.PaginationBottomLoading
 import site.pritom.designsystems.components.loading.space.SpaceRefreshIndicator
 import site.pritom.designsystems.components.search.SearchComponent
-import site.pritom.features.home.presentation.screen.PaginationError
 import site.pritom.features.home.presentation.viewmodel.HomeViewModel
 
 
@@ -45,9 +45,6 @@ fun HomeScreenForPhone(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel,
 ){
-
-    val uiState by viewModel.uiState
-        .collectAsStateWithLifecycle()
 
     val products = viewModel.products
         .collectAsLazyPagingItems()
@@ -163,7 +160,7 @@ fun HomeScreenForPhone(
                         GridItemSpan(maxLineSpan)
                     },
                 ) {
-                    SubHome()
+                    SubHome(totalItem = products.itemCount)
                 }
 
                 // -----------------------------------------------------
@@ -270,7 +267,7 @@ fun HomeScreenForPhone(
                         key = "initial_load_error",
                         span = { GridItemSpan(maxLineSpan) },
                     ) {
-                        PaginationError(
+                        ErrorWithRetryButton(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(16.dp),

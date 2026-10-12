@@ -28,8 +28,6 @@ import kotlin.time.Duration.Companion.milliseconds
 class HomeViewModel @Inject constructor(
     private val getProductListUseCase: GetProductListUseCase,
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(ProductListUiState())
-    val uiState: StateFlow<ProductListUiState> = _uiState.asStateFlow()
 
     val products: Flow<PagingData<Product>> =
         getProductListUseCase()

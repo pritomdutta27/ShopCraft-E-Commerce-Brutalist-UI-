@@ -48,19 +48,3 @@ fun HomeScreen(
         }
     }
 }
-
-@Composable
-fun PaginationError(modifier: Modifier, onRetry: () -> Unit, message: String) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = message, color = MaterialTheme.colorScheme.error)
-        Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = onRetry) {
-            Text("Retry")
-        }
-    }
-}

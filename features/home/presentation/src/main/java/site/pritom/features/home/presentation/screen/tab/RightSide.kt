@@ -30,10 +30,7 @@ fun RightSide(
     viewModel: HomeViewModel,
 ) {
 
-    val uiState by viewModel.uiState
-        .collectAsStateWithLifecycle()
-
-    val products = uiState.products
+    val products = viewModel.products
         .collectAsLazyPagingItems()
 
     Column(
